@@ -99,16 +99,16 @@ $(DEP_BOOST_BUILD):
 	cd $(DEP_BOOST_SRC);  ./bootstrap.sh --prefix=$(DEP_BOOST_BUILD) --without-libraries=$(BOOST_NOBUILD); ./b2 install
 
 $(SPECTRAST): $(OBJ_FILES_RAMP) $(OBJ_FILES_SPECTRAST) 
-	    $(CC) $(IFLAGS) -o $@ $^ $(LDFLAGS) -DSTANDALONE_LINUX -D_FILE_OFFSET_BITS=64 
+	    $(CC) $(IFLAGS) -o $@ $^ $(LDFLAGS) -DSTANDALONE_LINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE=1 
 
 obj/spectrast/%.o: src/spectrast/%.cpp
 	mkdir -p obj/spectrast
-	$(CC) $(IFLAGS) $(CFLAGS) -o $@ $<  -DSTANDALONE_LINUX -D_FILE_OFFSET_BITS=64
+	$(CC) $(IFLAGS) $(CFLAGS) -o $@ $<  -DSTANDALONE_LINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE=1
 
 
 obj/ramp/%.o: src/ramp/%.cpp
 	mkdir -p obj/ramp
-	$(CC) $(IFLAGS) $(CFLAGS) -o $@ $<  -DSTANDALONE_LINUX -D_FILE_OFFSET_BITS=64
+	$(CC) $(IFLAGS) $(CFLAGS) -o $@ $<  -DSTANDALONE_LINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE=1
 
 
 .PHONY: clean
