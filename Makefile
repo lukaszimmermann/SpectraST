@@ -27,31 +27,28 @@ OBJ= obj
 ARCHIVE=tar.gz
 ARCHIVE_BOOST=tar.bz2
 
-
 # DEPENDENCIES
 # EXPAT
-DEP_EXPAT_V != echo $(SRCEXTERN)/expat*.$(ARCHIVE) | sed -rn 's/[A-Za-z\/-]+([0-9\.]+).$(ARCHIVE)/\1/p'
-DEP_EXPAT_BUILD := $(abspath $(BUILDEXTERN)/expat-$(DEP_EXPAT_V))
-DEP_EXPAT_SRC= $(SRCEXTERN)/expat-$(DEP_EXPAT_V)
+DEP_EXPAT_V=$(shell echo $(SRCEXTERN)/expat*.$(ARCHIVE) | grep -Eo '[0-9]+(.[0-9]+)*')
+DEP_EXPAT_BUILD:=$(abspath $(BUILDEXTERN)/expat-$(DEP_EXPAT_V))
+DEP_EXPAT_SRC=$(SRCEXTERN)/expat-$(DEP_EXPAT_V)
 
 # zlib
-DEP_ZLIB_V != echo $(SRCEXTERN)/zlib*.$(ARCHIVE) | sed -rn 's/[A-Za-z\/-]+([0-9\.]+).$(ARCHIVE)/\1/p'
+DEP_ZLIB_V=$(shell echo $(SRCEXTERN)/zlib*.$(ARCHIVE) | grep -Eo '[0-9]+(.[0-9]+)*')
 DEP_ZLIB_BUILD := $(abspath $(BUILDEXTERN)/zlib-$(DEP_ZLIB_V))
 DEP_ZLIB_SRC := $(SRCEXTERN)/zlib-$(DEP_ZLIB_V)
 
 # gsl
-DEP_GSL_V != echo $(SRCEXTERN)/gsl*.$(ARCHIVE) | sed -rn 's/[A-Za-z\/-]+([0-9\.]+).$(ARCHIVE)/\1/p'
+DEP_GSL_V=$(shell echo $(SRCEXTERN)/gsl*.$(ARCHIVE) | grep -Eo '[0-9]+(.[0-9]+)*')
 DEP_GSL_BUILD := $(abspath $(BUILDEXTERN)/gsl-$(DEP_GSL_V))
 DEP_GSL_SRC := $(SRCEXTERN)/gsl-$(DEP_GSL_V)
 
 # Boost
-DEP_BOOST_V != echo $(SRCEXTERN)/boost*.$(ARCHIVE_BOOST) | sed -rn 's/[A-Za-z\/_]+([0-9_]+).$(ARCHIVE_BOOST)/\1/p'
+DEP_BOOST_V=$(shell echo $(SRCEXTERN)/boost*.$(ARCHIVE_BOOST) | grep -Eo '[0-9]+(.[0-9]+)*')
 DEP_BOOST_BUILD := $(abspath $(BUILDEXTERN)/boost_$(DEP_BOOST_V))
 DEP_BOOST_SRC := $(SRCEXTERN)/boost_$(DEP_BOOST_V)
 
 BOOST_NOBUILD=atomic,chrono,container,context,coroutine,date_time,exception,filesystem,graph,graph_parallel,iostreams,locale,log,math,mpi,program_options,python,random,regex,serialization,signals,system,test,thread,timer,wave
-
-
 
 CC=g++
 CFLAGS=-c -Wall
