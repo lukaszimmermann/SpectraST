@@ -44,7 +44,7 @@ DEP_GSL_BUILD := $(abspath $(BUILDEXTERN)/gsl-$(DEP_GSL_V))
 DEP_GSL_SRC := $(SRCEXTERN)/gsl-$(DEP_GSL_V)
 
 # Boost
-DEP_BOOST_V=$(shell echo $(SRCEXTERN)/boost*.$(ARCHIVE_BOOST) | grep -Eo '[0-9]+(.[0-9]+)*')
+DEP_BOOST_V=$(shell echo $(SRCEXTERN)/boost*.$(ARCHIVE_BOOST) | grep -Eo '[0-9]+(.[0-9]+)+')
 DEP_BOOST_BUILD := $(abspath $(BUILDEXTERN)/boost_$(DEP_BOOST_V))
 DEP_BOOST_SRC := $(SRCEXTERN)/boost_$(DEP_BOOST_V)
 
