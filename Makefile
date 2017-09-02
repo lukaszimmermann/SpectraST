@@ -42,20 +42,23 @@ DEP_GSL_V=$(shell echo $(SRCEXTERN)/gsl*.$(ARCHIVE) | grep -Eo '[0-9]+(.[0-9]+)*
 DEP_GSL_BUILD := $(abspath $(BUILDEXTERN)/gsl-$(DEP_GSL_V))
 DEP_GSL_SRC := $(SRCEXTERN)/gsl-$(DEP_GSL_V)
 
-CC=g++
+CC=g++ -static
 CFLAGS=-c -Wall
 SPECTRAST=spectrast
 
 
-LDFLAGS= -lm \
-		 -lpthread \
-		 -L$(DEP_GSL_BUILD)/lib  -lgsl -lgslcblas\
+LDFLAGS= -lpthread \
 		 -L$(DEP_ZLIB_BUILD)/lib -lz \
-         -Wl,--as-needed
+         -L$(DEP_GSL_BUILD)/lib  -lgsl -lgslcblas\
 
 IFLAGS= -I$(DEP_EXPAT_BUILD)/include \
 		-I$(DEP_ZLIB_BUILD)/include \
 	   	-I$(DEP_GSL_BUILD)/include \
+
+
+# Definitions
+D= -DSTANDALONE_LINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE=1
+
 
 # SpectraST sources
 CPP_FILES_SPECTRAST := $(wildcard src/spectrast/*.cpp)
@@ -67,6 +70,7 @@ OBJ_FILES_RAMP := $(addprefix obj/ramp/,$(notdir $(CPP_FILES_RAMP:.cpp=.o)))
 
 
 all: $(DEP_EXPAT_BUILD) $(DEP_ZLIB_BUILD) $(DEP_GSL_BUILD)  $(SPECTRAST)
+
 
 $(DEP_EXPAT_BUILD): 
 	mkdir -p $(DEP_EXPAT_BUILD)
@@ -85,16 +89,16 @@ $(DEP_GSL_BUILD):
 
 
 $(SPECTRAST): $(OBJ_FILES_RAMP) $(OBJ_FILES_SPECTRAST) 
-	    $(CC) $(IFLAGS) -o $@ $^ $(LDFLAGS) -DSTANDALONE_LINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE=1 
+	    $(CC) $(IFLAGS) -o $@ $^ $(LDFLAGS) $(D)
 
 obj/spectrast/%.o: src/spectrast/%.cpp
 	mkdir -p obj/spectrast
-	$(CC) $(IFLAGS) $(CFLAGS) -o $@ $<  -DSTANDALONE_LINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE=1
+	$(CC) $(IFLAGS) $(CFLAGS) -o $@ $< $(D)
 
 
 obj/ramp/%.o: src/ramp/%.cpp
 	mkdir -p obj/ramp
-	$(CC) $(IFLAGS) $(CFLAGS) -o $@ $<  -DSTANDALONE_LINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE=1
+	$(CC) $(IFLAGS) $(CFLAGS) -o $@ $< $(D)
 
 
 .PHONY: clean
@@ -105,3 +109,4 @@ clean:
 	rm -rf $(DEP_EXPAT_SRC)
 	rm -rf $(DEP_ZLIB_SRC)
 	rm -rf $(DEP_GSL_SRC)
+
