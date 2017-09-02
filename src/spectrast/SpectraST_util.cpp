@@ -345,7 +345,7 @@ char * escape_spaces (char * inStr)
     if ( outStr == NULL )
     {
       printf("Error mallocing memory in escape_spaces()!\n");
-      return('\0');
+      return(NULL);
     }
 
     for ( i = 0; inStr[i]; i++ ) 
