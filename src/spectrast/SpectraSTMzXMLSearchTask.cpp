@@ -10,7 +10,6 @@
 #include <sstream>
 #include <algorithm>
 #include <cmath>
-// #include <boost/concept_check.hpp>
 
 /*
 
