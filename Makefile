@@ -57,7 +57,6 @@ SPECTRAST=spectrast
 
 LDFLAGS= -lm \
 		 -lpthread \
-		 -L$(DEP_EXPAT_BUILD)/lib -lexpat \
 		 -L$(DEP_GSL_BUILD)/lib  -lgsl -lgslcblas\
 		 -L$(DEP_ZLIB_BUILD)/lib -lz
 
