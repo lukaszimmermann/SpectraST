@@ -1,0 +1,7 @@
+START: (Sun Nov 12 19:17:30 2017) spectrast -s -sM3 -sLtestLib.splib -sP! -sA! -sz! -sExml -sO/tmp SpectrastAdapter_1_hack.mzML 
+GENERAL: File offset size is 8 bytes. Big library supported.
+GENERAL: Pointer size is 8 bytes.
+PERFORMANCE: Total Run Time = 2 seconds. Total Number of Searches Performed = 0. Run Time per Search = inf seconds..
+
+END: (Sun Nov 12 19:17:32 2017) spectrast -s -sM3 -sLtestLib.splib -sP! -sA! -sz! -sExml -sO/tmp SpectrastAdapter_1_hack.mzML 
+==========
