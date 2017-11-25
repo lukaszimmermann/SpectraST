@@ -34,7 +34,7 @@ cramp.hpp
 #include <string>
 #include <stdlib.h>
 
-#include "ramp.h" // stuff we expose to C, structs etc
+#include "mzParser.h" // stuff we expose to C, structs etc
 
 enum eWhatToRead { RAMP_RUNINFO, RAMP_HEADER , RAMP_PEAKS, RAMP_INSTRUMENT };
 
@@ -233,7 +233,7 @@ public:
    rampScanInfo(RAMPFILE *m_handle, ramp_fileoffset_t index, int seqNum); // populate from file at this position, assign this sequence number
 
    rampScanInfo(rampScanInfo &rhs) { // copy constructor - note this moves a pointer from rhs to *this
-      memmove(this,&rhs,sizeof(rhs));
+      memmove((void*)this,(void*)&rhs,sizeof(rhs));
    };
    virtual ~rampScanInfo() {
    }
@@ -280,7 +280,7 @@ public:
    rampRunInfo(RAMPFILE *m_handle); // populate from file
 
    rampRunInfo(const rampRunInfo &rhs) { // copy constructor
-      memmove(this,&rhs,sizeof(rhs));
+      memmove((void*)this,(void*)&rhs,sizeof(rhs));
       if (rhs.m_scanOffsets) { // need a deepcopy
          if (NULL!=(m_scanOffsets = (ramp_fileoffset_t *)malloc(m_data.scanCount*sizeof(ramp_fileoffset_t)))) {
             memmove(m_scanOffsets,rhs.m_scanOffsets,m_data.scanCount*sizeof(ramp_fileoffset_t));
