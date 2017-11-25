@@ -529,6 +529,10 @@ double SpectraSTPeakList::calcDotNoBinning(SpectraSTPeakList* other, float mzTol
 }
  
 double SpectraSTPeakList::calcDotTierwiseOpenModSearch(SpectraSTPeakList* other, float mzTolerance, pair<double, string>& openMod, int& numTiersUsed) {
+  return calcDotTierwiseOpenModSearch(other, mzTolerance,  300.,  openMod, numTiersUsed);
+
+}
+double SpectraSTPeakList::calcDotTierwiseOpenModSearch(SpectraSTPeakList* other, float mzTolerance, float precMzTol, pair<double, string>& openMod, int& numTiersUsed) {
 
   openMod.first = 0.0;
   openMod.second = "";
@@ -546,7 +550,8 @@ double SpectraSTPeakList::calcDotTierwiseOpenModSearch(SpectraSTPeakList* other,
   double deltaMass = thisParentMass - otherParentMass;
   double absDeltaMass = fabs(deltaMass);
   
-  if (absDeltaMass >= 300.0) {
+ 
+  if (absDeltaMass >= precMzTol) {
     return (0.0);
   }
   

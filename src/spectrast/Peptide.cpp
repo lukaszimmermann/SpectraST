@@ -3248,7 +3248,11 @@ bool Peptide::processNewMod(char aa, double& deltaMass, string& modType, string&
       // modType not specified, or the specified modToken is the existing one mapped in the table 
       if (userToken.empty()) {
 	// use sToken, no need to do anything
-	if (update && foundToken->second.substr(0,3) == "USM") {
+	if (update && ( foundToken->second.substr(0,3) == "USM" )) {
+	  stringstream newModTypess;
+	  newModTypess.precision(6);
+	  newModTypess << "USM_" << aa << "_" << fixed << (*AAMonoisotopicMassTable)[aa] + deltaMass;
+	  foundToken->second = newModTypess.str();
 	  (*modMonoisotopicMassTable)[foundToken->second] = deltaMass; // update mass
 	}
 	else {
@@ -3278,12 +3282,12 @@ bool Peptide::processNewMod(char aa, double& deltaMass, string& modType, string&
       // however, note that this new mod will never be used in pepXML import, since in pepXML file only the mass
       // is given. SpectraST will always use the original mod for this modified mass on this amino acid.
       if (userToken.empty()) {
-	stringstream userTokenss;
-	userTokenss << aa << '[' << modType << ']';
-	userToken = userTokenss.str();
-	(*modTokenTable)[userToken] = modType;
-	(*modMonoisotopicMassTable)[modType] = deltaMass;
-	(*modAverageMassTable)[modType] = aveDeltaMass;
+	  stringstream userTokenss;
+	  userTokenss << aa << '[' << modType << ']';
+	  userToken = userTokenss.str();
+	  (*modTokenTable)[userToken] = modType;
+	  (*modMonoisotopicMassTable)[modType] = deltaMass;
+	  (*modAverageMassTable)[modType] = aveDeltaMass;
 	return (true);
       } else {
 	map<string, string>::iterator foundUserToken = modTokenTable->find(userToken);

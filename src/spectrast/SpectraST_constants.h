@@ -44,7 +44,7 @@ typedef unsigned int Boolean;
 //#define PEPXML_FILENAME_DOTEXT ".pepXML"
 #define DEFAULT_PEPXML_FILENAME_DOTEXT ".pep.xml"
 #define PEPXML_NAMESPACE_PX "pepx"
-#define PEPXML_SCHEMA "pepXML_v120.xsd"
+#define PEPXML_SCHEMA "pepXML_v122.xsd"
 
 // protXML stuff that's platform independent
 //#define PROTXML_FILENAME_DOTEXT ".protXML"

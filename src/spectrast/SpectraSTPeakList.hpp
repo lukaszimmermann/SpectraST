@@ -121,7 +121,7 @@ public:
   double calcDotAndDotBias(SpectraSTPeakList* other, double& dotBias);	
   double calcDotNoBinning(SpectraSTPeakList* other, float mzTolerance);
   double calcDotTierwiseOpenModSearch(SpectraSTPeakList* other, float mzTolerance, pair<double, string>& openMod, int& numTiersUsed);
-
+  double calcDotTierwiseOpenModSearch(SpectraSTPeakList* other, float mzTolerance, float precMzTol, pair<double, string>& openMod, int& numTiersUsed);
   // File output methods
   void writeToFile(ofstream& libFout);
   void writeToBinaryFile(ofstream& libFout);	

@@ -149,7 +149,7 @@ void SpectraSTSearch::search(SpectraSTLib* lib) {
       dot = m_query->getPeakList(charge)->calcDotAndDotBias(entry->getPeakList(), dotBias);
     } else {
       if (m_params.useTierwiseOpenModSearch) {
-        dot = m_query->getPeakList(charge)->calcDotTierwiseOpenModSearch(entry->getPeakList(), 0.5 / (double)(m_params.peakBinningNumBinsPerMzUnit), (*i)->getSimScoresRef().openMod, numTiersUsed);   
+        dot = m_query->getPeakList(charge)->calcDotTierwiseOpenModSearch(entry->getPeakList(), 0.5 / (double)(m_params.peakBinningNumBinsPerMzUnit), (double)(m_params.precursorMzTolerance), (*i)->getSimScoresRef().openMod, numTiersUsed);   
         dotBias = (double)numTiersUsed;
       } else if (m_params.peakNoBinning) {
 	dot = m_query->getPeakList(charge)->calcDotNoBinning(entry->getPeakList(), 0.5 / (double)(m_params.peakBinningNumBinsPerMzUnit));

@@ -1,4 +1,5 @@
 #include "Glycan.hpp"
+#include <boost/concept_check.hpp>
 
 vector<Monosaccharide*>* Glycan::monosaccharideList = NULL;
 map<char,unsigned int>* Glycan::monosaccharideSimpleIndex = NULL;
