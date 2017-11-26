@@ -46,7 +46,8 @@ DEP_GSL_SRC := $(SRCEXTERN)/gsl-$(DEP_GSL_V)
 SPECTRAST=spectrast
 
 
-LDFLAGS += -L$(DEP_ZLIB_BUILD)/lib -lz \
+LDFLAGS += -lpthread \
+           -L$(DEP_ZLIB_BUILD)/lib -lz \
            -L$(DEP_GSL_BUILD)/lib  -lgsl -lgslcblas\
            -L$(DEP_EXPAT_BUILD)/lib -lexpat \
 	   -static -static-libgcc -static-libstdc++ \

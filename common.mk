@@ -97,7 +97,7 @@ CXXFLAGS += -DSTANDALONE_LINUX
 ifeq ($(OS),Linux)
    CXXFLAGS += -D__LINUX__
    # compile with position independent code to allow for library inclusion
-   # CXXFLAGS += -fPIC
+   CXXFLAGS += -fPIC
 endif
 ifeq ($(OS),MingW)
    CXXFLAGS += -D__MINGW__ -D_USE_32BIT_TIME_T -D_GLIBCXX_USE_WCHAR_T
