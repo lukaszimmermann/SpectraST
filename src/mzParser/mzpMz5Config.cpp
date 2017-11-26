@@ -1,4 +1,4 @@
-#include "Parsers/mzParser/mzParser.h"
+#include "mzParser.h"
 #ifdef MZP_MZ5
 mzpMz5Config::mzpMz5Config(){
 	init(false, true, true);

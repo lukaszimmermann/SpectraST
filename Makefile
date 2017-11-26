@@ -17,6 +17,7 @@
 # ISB HAVE BEEN PREVIOUSLY ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.            #
 #                                                                                 #
 ###################################################################################
+include common.mk
 
 SRC= src
 SRCEXTERN=$(SRC)/extern
@@ -42,35 +43,27 @@ DEP_GSL_V=$(shell echo $(SRCEXTERN)/gsl*.$(ARCHIVE) | grep -Eo '[0-9]+(.[0-9]+)*
 DEP_GSL_BUILD := $(abspath $(BUILDEXTERN)/gsl-$(DEP_GSL_V))
 DEP_GSL_SRC := $(SRCEXTERN)/gsl-$(DEP_GSL_V)
 
-CC=g++ -static
-CFLAGS=-c -Wall
 SPECTRAST=spectrast
 
 
-LDFLAGS= -lpthread \
-		 -L$(DEP_ZLIB_BUILD)/lib -lz \
-         -L$(DEP_GSL_BUILD)/lib  -lgsl -lgslcblas\
+LDFLAGS += -L$(DEP_ZLIB_BUILD)/lib -lz \
+           -L$(DEP_GSL_BUILD)/lib  -lgsl -lgslcblas\
+           -L$(DEP_EXPAT_BUILD)/lib -lexpat \
+	   -static -static-libgcc -static-libstdc++ \
 
 IFLAGS= -I$(DEP_EXPAT_BUILD)/include \
-		-I$(DEP_ZLIB_BUILD)/include \
-	   	-I$(DEP_GSL_BUILD)/include \
-
-
-# Definitions
-D= -DSTANDALONE_LINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE=1
-
+	-I$(DEP_ZLIB_BUILD)/include \
+	-I$(DEP_GSL_BUILD)/include \
 
 # SpectraST sources
 CPP_FILES_SPECTRAST := $(wildcard src/spectrast/*.cpp)
 OBJ_FILES_SPECTRAST := $(addprefix obj/spectrast/,$(notdir $(CPP_FILES_SPECTRAST:.cpp=.o))) 
 
 # Ramp sources
-CPP_FILES_RAMP := $(wildcard src/ramp/*.cpp)
-OBJ_FILES_RAMP := $(addprefix obj/ramp/,$(notdir $(CPP_FILES_RAMP:.cpp=.o)))
+CPP_FILES_RAMP := $(wildcard src/mzParser/*.cpp)
+OBJ_FILES_RAMP := $(addprefix obj/mzParser/,$(notdir $(CPP_FILES_RAMP:.cpp=.o)))
 
-
-all: $(DEP_EXPAT_BUILD) $(DEP_ZLIB_BUILD) $(DEP_GSL_BUILD)  $(SPECTRAST)
-
+all: $(SPECTRAST)
 
 $(DEP_EXPAT_BUILD): 
 	mkdir -p $(DEP_EXPAT_BUILD)
@@ -87,19 +80,16 @@ $(DEP_GSL_BUILD):
 	cd $(SRCEXTERN) ; tar xf gsl*$(ARCHIVE)
 	cd $(DEP_GSL_SRC);  ./configure --prefix=$(DEP_GSL_BUILD) --with-pic --disable-shared; make; make install
 
-
-$(SPECTRAST): $(OBJ_FILES_RAMP) $(OBJ_FILES_SPECTRAST) 
-	    $(CC) $(IFLAGS) -o $@ $^ $(LDFLAGS) $(D)
+$(SPECTRAST): $(DEP_ZLIB_BUILD) $(DEP_EXPAT_BUILD) $(DEP_GSL_BUILD) $(OBJ_FILES_RAMP) $(OBJ_FILES_SPECTRAST) 
+	    $(CXX) $(IFLAGS) -o $@  $(OBJ_FILES_SPECTRAST) $(OBJ_FILES_RAMP)  $(LDFLAGS)  
 
 obj/spectrast/%.o: src/spectrast/%.cpp
 	mkdir -p obj/spectrast
-	$(CC) $(IFLAGS) $(CFLAGS) -o $@ $< $(D)
+	$(CXX) -c $(IFLAGS) $(CXXFLAGS) -o $@ $<
 
-
-obj/ramp/%.o: src/ramp/%.cpp
-	mkdir -p obj/ramp
-	$(CC) $(IFLAGS) $(CFLAGS) -o $@ $< $(D)
-
+obj/mzParser/%.o: src/mzParser/%.cpp
+	mkdir -p obj/mzParser
+	$(CXX) -c $(IFLAGS) $(CXXFLAGS) -o $@ $<
 
 .PHONY: clean
 clean:
@@ -109,4 +99,4 @@ clean:
 	rm -rf $(DEP_EXPAT_SRC)
 	rm -rf $(DEP_ZLIB_SRC)
 	rm -rf $(DEP_GSL_SRC)
-
+	rm -rf lib/

@@ -21,7 +21,7 @@ limitations under the License.
 #include <iostream>
 #include <cmath>
 #include <climits>
-#include "Parsers/mzParser/MSNumpress.hpp"
+#include "MSNumpress.hpp"
 
 namespace ms {
   namespace numpress {

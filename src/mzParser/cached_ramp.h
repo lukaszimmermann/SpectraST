@@ -32,7 +32,7 @@
 #define AFX_CACHED_RAMP__H__03CA0A06_4827_4CC4_BE2B_72178B5D0E71__INCLUDED_
 
 //#include "ramp.h" // the real RAMP API - make sure it's included before our #defines
-#include "Parsers/mzParser/mzParser.h" // the real RAMP API - make sure it's included before our #defines
+#include "mzParser.h" // the real RAMP API - make sure it's included before our #defines
 
 //
 // RAMP-like function set that caches file opens and file reads

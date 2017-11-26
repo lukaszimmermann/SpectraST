@@ -1,4 +1,4 @@
-#include "Parsers/mzParser/mzParser.h"
+#include "mzParser.h"
 
 MzParser::MzParser(BasicSpectrum* s){
   spec=s;

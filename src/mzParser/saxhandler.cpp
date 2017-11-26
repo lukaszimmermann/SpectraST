@@ -128,7 +128,7 @@ MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 The End 
 */
 
-#include "Parsers/mzParser/mzParser.h"
+#include "mzParser.h"
 
 // Static callback handlers
 static void mzp_startElementCallback(void *data, const XML_Char *el, const XML_Char **attr)

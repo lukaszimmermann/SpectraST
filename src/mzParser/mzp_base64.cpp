@@ -5,7 +5,7 @@
 //#include <cstring>
 
 //#include "base64.h"
-#include "Parsers/mzParser/mzParser.h"
+#include "mzParser.h"
 
 inline int getPosition( char buf );
 

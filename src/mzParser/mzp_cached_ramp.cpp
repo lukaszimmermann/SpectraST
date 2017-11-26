@@ -35,7 +35,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #define CACHED_RAMP_HOME // code lives here
-#include "Parsers/mzParser/cached_ramp.h"
+#include "cached_ramp.h"
 #ifdef _RAMP_H
 #error "wrong interface - got ramp.h, wanted mzParser.h"
 #endif

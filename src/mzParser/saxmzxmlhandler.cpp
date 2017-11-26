@@ -18,7 +18,7 @@
  * Artistic License granted 3/11/2005
  *******************************************************/
 
-#include "Parsers/mzParser/mzParser.h"
+#include "mzParser.h"
 
 
 

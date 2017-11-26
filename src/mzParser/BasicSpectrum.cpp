@@ -5,7 +5,7 @@
   Version 1.1, Mar. 28, 2012
 */
 
-#include "Parsers/mzParser/mzParser.h"
+#include "mzParser.h"
 
 
 //------------------------------------------

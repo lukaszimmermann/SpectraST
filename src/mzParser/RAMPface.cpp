@@ -1,4 +1,4 @@
-#include "Parsers/mzParser/mzParser.h"
+#include "mzParser.h"
 
 int checkFileType(const char* fname){
   char file[256];

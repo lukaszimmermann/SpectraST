@@ -1,4 +1,4 @@
-#include "Parsers/mzParser/mzParser.h"
+#include "mzParser.h"
 #ifdef MZP_MZ5
 StrType getStringType() {
 	StrType stringtype(PredType::C_S1, H5T_VARIABLE);

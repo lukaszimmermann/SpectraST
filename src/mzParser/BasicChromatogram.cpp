@@ -1,4 +1,4 @@
-#include "Parsers/mzParser/mzParser.h"
+#include "mzParser.h"
 
 BasicChromatogram::BasicChromatogram(){}
 

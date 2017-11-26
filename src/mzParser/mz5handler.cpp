@@ -1,4 +1,4 @@
-#include "Parsers/mzParser/mzParser.h"
+#include "mzParser.h"
 
 #ifdef MZP_MZ5
 mzpMz5Handler::mzpMz5Handler(mzpMz5Config* c, BasicSpectrum* s){

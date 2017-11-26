@@ -47,7 +47,7 @@
    index in a file.
  */
 
-#include "Parsers/mzParser/mzParser.h"
+#include "mzParser.h"
 
 
 Czran::Czran(){
